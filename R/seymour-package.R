@@ -26,7 +26,8 @@
 #'
 #' @md
 #' @name seymour
-#' @docType package
+#'
+#' @aliases seymour-package
 #' @author Bob Rudis (bob@@rud.is)
 #' @keywords internal
 #' @import httr
