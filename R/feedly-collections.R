@@ -39,7 +39,7 @@ feedly_collections <- function(with_stats=FALSE,
 
   }
 
-  out <- bind_rows(coll$feeds[which(sapply(coll$feeds, nrow) > 0)])
+  out <- dplyr::bind_rows(coll$feeds[which(sapply(coll$feeds, nrow) > 0)])
 
   class(out) <- c("tbl_df", "tbl", "data.frame")
 

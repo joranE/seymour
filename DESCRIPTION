@@ -31,5 +31,6 @@ Imports:
     httr,
     utils,
     jsonlite,
-    magrittr
-RoxygenNote: 7.0.2
+    magrittr,
+    dplyr
+RoxygenNote: 7.3.1

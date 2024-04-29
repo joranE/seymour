@@ -13,6 +13,7 @@
 #' @param progress if `TRUE` then display simple progress as the API calls are
 #'        made. Default is `FALSE`.
 #' @export
+#' @importFrom dplyr bind_rows
 #' @examples
 #' r_bloggers_feed_id <- "feed/http://feeds.feedburner.com/RBloggers"
 #'
@@ -49,6 +50,6 @@ feedly_continue <- function(start, max = 0L, .progress = FALSE) {
 
   if (.progress) cat("\n")
 
-  bind_rows(streams)
+  dplyr::bind_rows(streams)
 
 }
