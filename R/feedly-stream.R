@@ -104,10 +104,10 @@ feedly_stream <- function(stream_id,
 
   ct <- as.integer(count)
 
-  if (!is.null(continuation)) ct <- 100L
+  if (!is.null(continuation)) ct <- 1000L
 
-  if (ct > 100L) ct <- 100L
-  if (ct < 1L) ct <- 100L
+  if (ct > 1000L) ct <- 1000L
+  if (ct < 1L) ct <- 1000L
 
   #ranked <- match.arg(ranked[1], c("newest", "oldest"))
 

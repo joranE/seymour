@@ -36,7 +36,7 @@ feedly_continue <- function(start, max = 0L, .progress = FALSE) {
 
     feedly_stream(
       stream_id = start$id,
-      count = 100L, # 100 is the API max so use it
+      count = 1000L, # 1000 is the API max so use it
       continuation = start$continuation
     ) -> start
 
