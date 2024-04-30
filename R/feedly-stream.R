@@ -97,17 +97,17 @@ feedly_stream <- function(stream_id,
                           #unread_only = FALSE,
                           newer_than = NULL,
                           older_than = NULL,
-                          count = 100L,
+                          count = 250L,
                           continuation = NULL,
                           include_ai_actions = TRUE,
                           feedly_token = feedly_access_token()) {
 
   ct <- as.integer(count)
 
-  if (!is.null(continuation)) ct <- 1000L
+  if (!is.null(continuation)) ct <- 250L
 
-  if (ct > 1000L) ct <- 1000L
-  if (ct < 1L) ct <- 1000L
+  if (ct > 250L) ct <- 250L
+  if (ct < 1L) ct <- 250L
 
   #ranked <- match.arg(ranked[1], c("newest", "oldest"))
 
