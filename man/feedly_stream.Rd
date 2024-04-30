@@ -6,19 +6,20 @@
 \usage{
 feedly_stream(
   stream_id,
-  ranked = c("newest", "oldest"),
-  unread_only = FALSE,
+  newer_than = NULL,
+  older_than = NULL,
   count = 1000L,
   continuation = NULL,
+  include_ai_actions = TRUE,
   feedly_token = feedly_access_token()
 )
 }
 \arguments{
 \item{stream_id}{the id of the stream}
 
-\item{ranked}{one of "\code{newest}" or "\code{oldest}" (date order sort return). Default is "\code{newest}".}
+\item{newer_than}{Datetime}
 
-\item{unread_only}{if \code{TRUE} will only return unread itemm (default is \code{FALSE})}
+\item{older_than}{Datetime}
 
 \item{count}{numnber of items to retrieve (API will only return a max of 1,000
 items for a single response and populate \code{continuation}
@@ -28,7 +29,14 @@ internally if this is the case)}
 
 \item{continuation}{pagination parameter (retrieved from previous API call)}
 
+\item{include_ai_actions}{boolean; if \code{TRUE} (default) include AI Actions from
+articles}
+
 \item{feedly_token}{Your Feedly Developer Access Token (see \code{\link[=feedly_access_token]{feedly_access_token()}})}
+
+\item{ranked}{one of "\code{newest}" or "\code{oldest}" (date order sort return). Default is "\code{newest}".}
+
+\item{unread_only}{if \code{TRUE} will only return unread itemm (default is \code{FALSE})}
 }
 \value{
 This endpoint returns a \code{list} with the following entries:
