@@ -83,17 +83,23 @@
 #'        with a value that should be passed to subsequent calls
 #'        to page through the results; `count` will be reset to 1,000
 #'        internally if this is the case)
+#' @param newer_than Datetime
+#' @param older_than Datetime
 #' @param continuation pagination parameter (retrieved from previous API call)
+#' @param include_ai_actions boolean; if `TRUE` (default) include AI Actions from
+#' articles
 #' @param feedly_token Your Feedly Developer Access Token (see [feedly_access_token()])
 #' @note Feed ids, category ids, tag ids or a system category id can be used as stream ids.
 #' @references (<https://developer.feedly.com/v3/streams/>)
 #' @export
 feedly_stream <- function(stream_id,
-                          ranked = c("newest", "oldest"),
-                          unread_only = FALSE,
-                          # newer_than = NULL,
+                          #ranked = c("newest", "oldest"),
+                          #unread_only = FALSE,
+                          newer_than = NULL,
+                          older_than = NULL,
                           count = 1000L,
                           continuation = NULL,
+                          include_ai_actions = TRUE,
                           feedly_token = feedly_access_token()) {
 
   ct <- as.integer(count)
@@ -103,11 +109,18 @@ feedly_stream <- function(stream_id,
   if (ct > 1000L) ct <- 1000L
   if (ct < 1L) ct <- 1000L
 
-  ranked <- match.arg(ranked[1], c("newest", "oldest"))
+  #ranked <- match.arg(ranked[1], c("newest", "oldest"))
 
   # if (!is.null(newer_than)) {
   #   newer_than <- as.numeric(as.POSIXct(newer_than))*1000
   # }
+
+  if (!is.null(newer_than)){
+    newer_than <- as.integer(newer_than)
+  }
+  if (!is.null(older_than)){
+    older_than <- as.integer(older_than)
+  }
 
   httr::GET(
     url = "https://cloud.feedly.com/v3/streams/contents",
@@ -119,11 +132,13 @@ feedly_stream <- function(stream_id,
     },
     query = list(
       streamId = stream_id,
-      ranked = ranked,
-      unreadOnly = if (unread_only) "true" else "false",
-      # newerThan = newer_than,
+      #ranked = ranked,
+      #unreadOnly = if (unread_only) "true" else "false",
+      newerThan = newer_than,
+      olderThan = older_than,
       count = ct,
-      continuation = continuation
+      continuation = continuation,
+      includeAiActions = include_ai_actions
     )
   ) -> res
 
