@@ -123,7 +123,7 @@ feedly_stream <- function(stream_id,
   }
 
   httr::GET(
-    url = "https://cloud.feedly.com/v3/streams/contents",
+    url = "https://api.feedly.com/v3/streams/contents", #"https://cloud.feedly.com/v3/streams/contents"
     .seymour_ua,
     if (!is.null(feedly_token)) {
       httr::add_headers(
